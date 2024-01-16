@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/css/Style.css">
-    <title>Catalogo Livros</title>
+    <title>Adcionar Livros</title>
 </head>
+
 <body>
     <header>
         <nav>
@@ -23,8 +25,22 @@
             </ul>
         </nav>
     </header>
-    <div class="container" id="Livros-Container">
+    <div class="Adciona">
+        <div class="Img_Capa">
+            <label class="picture" for="picture_input" tabindex="0">
+                <span class="picture_img"></span>
+            </label>
+            <input type="file" accept="image/*" name="picture_input" id="picture_input">
+        </div>
+        <div class="Adc_Titulo">
+            <label for="Titulo">Titulo do Livro:</label>
+            <input type="text" id="Titulo">
+            <label for="Descrição">Descrição</label>
+            <input type="text" id="">
+        </div>
     </div>
-    <script src="src/js/Script.js"></script>
+
+    <script src="src/js/ScrpitAdciona.js"></script>
 </body>
+
 </html>
