@@ -80,9 +80,9 @@ a:hover{
 }
 
 .Adc_Titulo {
-    display: inline-block;
     margin: 15px;
     margin-top: 50px;
+    width: 50%;
 }
 
 #picture_input {
@@ -114,4 +114,19 @@ a:hover{
 
 .img {
     max-width: 100%;
+}
+
+#Titulo{
+    width: 85%;
+}
+
+#Descricao {
+    width: 85%;
+    height: 50vh;
+    resize: none;
+}
+
+#Submit {
+    margin-top: 20px;
+    margin-left: 25vw;
 }
