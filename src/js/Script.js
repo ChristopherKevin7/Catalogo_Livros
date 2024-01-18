@@ -1,5 +1,4 @@
 const caminhoParaCatalogo = '../../Catalogo.json'
-let data
 const catalogoAtual = JSON.parse(localStorage.getItem(caminhoParaCatalogo)) || [];
 
 function ToLoad() {
@@ -53,12 +52,12 @@ function ToLoad() {
                 const editButton = document.createElement("button")
                 editButton.textContent = "Editar"
                 editButton.classList.add("Edit")
-                editButton.addEventListener("click", () => editarLivro(Livro))
+                editButton.addEventListener("click", () => editarLivro(Livro, Catalogo))
 
                 const deleteButton = document.createElement("button")
                 deleteButton.textContent = "Deletar"
                 deleteButton.classList.add("Delete")
-                deleteButton.addEventListener("click", () => deletarLivro(Livro))
+                deleteButton.addEventListener("click", () => deletarLivro(Livro, Catalogo))
 
                 card.appendChild(img)
                 card.appendChild(Titulo)
@@ -71,7 +70,7 @@ function ToLoad() {
 
 ToLoad()
 
-function deletarLivro(livro,Catalogo) {
+function deletarLivro(livro ,Catalogo) {
     // Remove o livro do catálogo atual
     const indexNoCatalogo = catalogoAtual.findIndex(l => l.Nome === livro.Nome);
     if (indexNoCatalogo !== -1) {
