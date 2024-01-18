@@ -1,47 +1,96 @@
-const caminhoParaCatalogo = '../../Catalogo.json';
+const caminhoParaCatalogo = '../../Catalogo.json'
+let data
+const catalogoAtual = JSON.parse(localStorage.getItem(caminhoParaCatalogo)) || [];
 
-    
-    function ToLoad() {
-        fetch('Catalogo.json')
-            .then(response => response.json())
-            .then(Catalogo => {
-                const container = document.querySelector("#Livros-Container")
+function ToLoad() {
+    fetch('Catalogo.json')
+        .then(response => response.json())
+        .then(Catalogo => {
+            const container = document.querySelector("#Livros-Container")
 
-                const catalogoAtual = JSON.parse(localStorage.getItem(caminhoParaCatalogo)) || [];
+            Catalogo.map(Livro => {
+                const card = document.createElement("div")
+                card.classList.add("card")
+                card.setAttribute("data-nome", Livro.Nome);
 
-                Catalogo.map(Livro => {
-                    const card = document.createElement("div")
-                    card.classList.add("card")
+                const img = document.createElement("img")
+                img.classList.add("Capa")
+                img.src = Livro.Imagem
+                img.alt = Livro.Nome
 
-                    const img =document.createElement("img")
-                    img.src = Livro.Imagem
-                    img.alt = Livro.Nome
+                const Titulo = document.createElement("h3")
+                Titulo.textContent = Livro.Nome
 
-                    const Titulo = document.createElement("h3")
-                    Titulo.textContent = Livro.Nome
+                const editButton = document.createElement("button");
+                editButton.textContent = "Editar"
+                editButton.classList.add("Edit")
+                editButton.addEventListener("click", () => editarLivro(Livro, Catalogo))
 
-                    card.appendChild(img)
-                    card.appendChild(Titulo)
-                    container.appendChild(card)
-                })
-                catalogoAtual.map(Livro => {
-                    const card = document.createElement("div")
-                    card.classList.add("card")
+                const deleteButton = document.createElement("button")
+                deleteButton.textContent = "Deletar"
+                deleteButton.classList.add("Delete")
+                deleteButton.addEventListener("click", () => deletarLivro(Livro, Catalogo))
 
-                    const img =document.createElement("img")
-                    img.src = Livro.Imagem
-                    img.alt = Livro.Nome
-
-                    const Titulo = document.createElement("h3")
-                    Titulo.textContent = Livro.Nome
-
-                    card.appendChild(img)
-                    card.appendChild(Titulo)
-                    container.appendChild(card)
-                })
+                card.appendChild(img)
+                card.appendChild(Titulo)
+                card.appendChild(editButton)
+                card.appendChild(deleteButton)
+                container.appendChild(card)
             })
+            catalogoAtual.map(Livro => {
+                const card = document.createElement("div")
+                card.classList.add("card")
+                card.setAttribute("data-nome", Livro.Nome);
+
+                const img = document.createElement("img")
+                img.classList.add("Capa")
+                img.src = Livro.Imagem
+                img.alt = Livro.Nome
+
+                const Titulo = document.createElement("h3")
+                Titulo.textContent = Livro.Nome
+
+                const editButton = document.createElement("button")
+                editButton.textContent = "Editar"
+                editButton.classList.add("Edit")
+                editButton.addEventListener("click", () => editarLivro(Livro))
+
+                const deleteButton = document.createElement("button")
+                deleteButton.textContent = "Deletar"
+                deleteButton.classList.add("Delete")
+                deleteButton.addEventListener("click", () => deletarLivro(Livro))
+
+                card.appendChild(img)
+                card.appendChild(Titulo)
+                card.appendChild(editButton)
+                card.appendChild(deleteButton)
+                container.appendChild(card)
+            })
+        })
+}
+
+ToLoad()
+
+function deletarLivro(livro,Catalogo) {
+    // Remove o livro do catálogo atual
+    const indexNoCatalogo = catalogoAtual.findIndex(l => l.Nome === livro.Nome);
+    if (indexNoCatalogo !== -1) {
+        catalogoAtual.splice(indexNoCatalogo, 1);
     }
 
-    ToLoad()
+    // Remove o livro do catálogo original
+    const indexNoCatalogoOriginal = Catalogo.findIndex(l => l.Nome === livro.Nome);
+    if (indexNoCatalogoOriginal !== -1) {
+        Catalogo.splice(indexNoCatalogoOriginal, 1);
+    }
 
-    
+    // Atualiza o localStorage
+    localStorage.setItem(caminhoParaCatalogo, JSON.stringify(catalogoAtual));
+
+    // Atualiza a exibição removendo o elemento do DOM
+    const container = document.querySelector("#Livros-Container");
+    const cardToDelete = container.querySelector(`[data-nome="${livro.Nome}"]`);
+    if (cardToDelete) {
+        container.removeChild(cardToDelete);
+    }
+}
