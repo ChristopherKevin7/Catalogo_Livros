@@ -20,10 +20,6 @@ function ToLoad() {
                 const Titulo = document.createElement("h3")
                 Titulo.textContent = Livro.Nome
 
-                const editButton = document.createElement("button");
-                editButton.textContent = "Editar"
-                editButton.classList.add("Edit")
-                editButton.addEventListener("click", () => editarLivro(Livro, Catalogo))
 
                 const deleteButton = document.createElement("button")
                 deleteButton.textContent = "Deletar"
@@ -32,7 +28,6 @@ function ToLoad() {
 
                 card.appendChild(img)
                 card.appendChild(Titulo)
-                card.appendChild(editButton)
                 card.appendChild(deleteButton)
                 container.appendChild(card)
             })
@@ -49,11 +44,6 @@ function ToLoad() {
                 const Titulo = document.createElement("h3")
                 Titulo.textContent = Livro.Nome
 
-                const editButton = document.createElement("button")
-                editButton.textContent = "Editar"
-                editButton.classList.add("Edit")
-                editButton.addEventListener("click", () => editarLivro(Livro, Catalogo))
-
                 const deleteButton = document.createElement("button")
                 deleteButton.textContent = "Deletar"
                 deleteButton.classList.add("Delete")
@@ -61,7 +51,6 @@ function ToLoad() {
 
                 card.appendChild(img)
                 card.appendChild(Titulo)
-                card.appendChild(editButton)
                 card.appendChild(deleteButton)
                 container.appendChild(card)
             })
